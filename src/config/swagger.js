@@ -11,7 +11,7 @@ const swaggerOptions = {
       description: 'API para gestionar libros y órdenes',
     },
   },
-  apis: ['./src/routes/*.js'],  // Define la ruta donde Swagger buscará las definiciones de rutas
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);

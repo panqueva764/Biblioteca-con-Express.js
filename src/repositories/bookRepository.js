@@ -1,6 +1,6 @@
 // src/repositories/bookRepository.js
 const { Book } = require('../models/book');
-const { Op } = require('sequelize');  // Necesario para realizar filtros avanzados
+const { Op } = require('sequelize');
 
 class BookRepository {
   async create(data) {

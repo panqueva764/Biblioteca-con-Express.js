@@ -28,7 +28,7 @@ const bookController = require('../controllers/bookController');
  *                   type: string
  *     responses:
  *       200:
- *         description: Libros registrados correctamente
+ *         description: Libros registrados correctamente ya se haya consultado con filtro o sin
  */
 router.post('/books', bookController.addBook); // Cambiado a addBook
 
@@ -105,8 +105,5 @@ router.post('/books/lend/:id', bookController.lendBook);
  *         description: Libro devuelto correctamente
  */
 router.put('/books/return/:id', bookController.returnBook);
-
-router.get('/books', bookController.getBooks);  // Esta ruta ya está configurada para aceptar query params
-
 
 module.exports = router;

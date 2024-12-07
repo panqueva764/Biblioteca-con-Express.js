@@ -16,7 +16,7 @@ app.use('/api', bookRoutes);
 app.use('/api', loanRoutes);  // Rutas para préstamos
 
 // Sincronización de la base de datos (forzar recreación en desarrollo)
-sequelize.sync({ force: true })  // Cambiado: agregar { force: true } para recrear tablas
+sequelize.sync({ force: true })
   .then(() => console.log('Base de datos sincronizada y tablas recreadas'))
   .catch(err => console.log('Error al sincronizar la base de datos: ', err));
 

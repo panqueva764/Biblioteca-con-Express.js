@@ -29,7 +29,7 @@ class LoanService {
     // Marcar el préstamo como devuelto
     await loan.update({
       isReturned: true,
-      returnDate: new Date(), // Puedes agregar una fecha de devolución aquí
+      returnDate: new Date(),
     });
 
     return loan;
