@@ -29,6 +29,10 @@ class BookService {
   async returnBook(id) {
     return bookRepository.returnBook(id);
   }
+  
+  async getBooksFiltered(filters) {
+    return bookRepository.findBooks(filters);
+  }
 }
 
 module.exports = new BookService();

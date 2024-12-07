@@ -106,4 +106,7 @@ router.post('/books/lend/:id', bookController.lendBook);
  */
 router.put('/books/return/:id', bookController.returnBook);
 
+router.get('/books', bookController.getBooks);  // Esta ruta ya está configurada para aceptar query params
+
+
 module.exports = router;

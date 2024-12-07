@@ -3,7 +3,10 @@ const bookService = require('../services/bookService');
 
 const getBooks = async (req, res) => {
   try {
-    const books = await bookService.getAllBooks();
+    const { title, genre } = req.query; // Parámetros de filtro desde la query string
+    const filters = { title, genre };   // Creamos el objeto de filtros
+
+    const books = await bookService.getBooksFiltered(filters);  // Llamamos al servicio con los filtros
     res.status(200).json(books);
   } catch (err) {
     res.status(500).json({ error: err.message });
