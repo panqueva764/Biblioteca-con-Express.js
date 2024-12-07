@@ -6,7 +6,7 @@ const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'E-Commerce API',
+      title: 'Biblioteca API',
       version: '1.0.0',
       description: 'API para gestionar libros y órdenes',
     },
