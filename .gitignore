@@ -1,0 +1,16 @@
+# Ignorar la carpeta node_modules
+node_modules/
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar archivos del sistema operativo (en Mac, Windows, etc.)
+.DS_Store
+Thumbs.db
+
+# Ignorar los archivos de entorno (si usas .env)
+.env
+
+# Ignorar archivos generados por el editor (por ejemplo, VSCode)
+.vscode/
+.idea/
