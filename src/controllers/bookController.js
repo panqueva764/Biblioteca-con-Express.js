@@ -1,6 +1,14 @@
 // src/controllers/bookController.js
 const bookService = require('../services/bookService');
 
+/**
+ * Obtiene la lista de libros según los filtros proporcionados.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} req.query - Parámetros de consulta.
+ * @param {string} [req.query.title] - Título del libro para filtrar.
+ * @param {string} [req.query.genre] - Género del libro para filtrar.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const getBooks = async (req, res) => {
   try {
     const { title, genre } = req.query; // Parámetros de filtro desde la query string
@@ -13,6 +21,12 @@ const getBooks = async (req, res) => {
   }
 };
 
+/**
+ * Agrega uno o varios libros al sistema.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Array|Object} req.body - Información del libro(s) a agregar.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const addBook = async (req, res) => {
   try {
     // Si se envía un array de libros
@@ -28,6 +42,12 @@ const addBook = async (req, res) => {
   }
 };
 
+/**
+ * Marca un libro como prestado.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {string} req.params.id - ID del libro a prestar.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const lendBook = async (req, res) => {
   try {
     const book = await bookService.lendBook(req.params.id);
@@ -37,6 +57,12 @@ const lendBook = async (req, res) => {
   }
 };
 
+/**
+ * Marca un libro como devuelto.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {string} req.params.id - ID del libro a devolver.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const returnBook = async (req, res) => {
   try {
     const book = await bookService.returnBook(req.params.id);
@@ -46,6 +72,11 @@ const returnBook = async (req, res) => {
   }
 };
 
+/**
+ * Obtiene la lista de libros disponibles para préstamo.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const getAvailableBooks = async (req, res) => {
   try {
     const books = await bookService.getAvailableBooks();
@@ -55,6 +86,11 @@ const getAvailableBooks = async (req, res) => {
   }
 };
 
+/**
+ * Obtiene la lista de libros no disponibles para préstamo.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const getUnavailableBooks = async (req, res) => {
   try {
     const books = await bookService.getUnavailableBooks();
@@ -64,4 +100,5 @@ const getUnavailableBooks = async (req, res) => {
   }
 };
 
+// Exportamos los controladores para ser utilizados en las rutas
 module.exports = { getBooks, addBook, lendBook, returnBook, getAvailableBooks, getUnavailableBooks };

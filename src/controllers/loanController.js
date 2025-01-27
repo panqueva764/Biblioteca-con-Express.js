@@ -1,6 +1,14 @@
 // src/controllers/loanController.js
 const loanService = require('../services/loanService');
 
+/**
+ * Crea un nuevo préstamo de un libro para un usuario.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} req.body - Datos del préstamo.
+ * @param {string} req.body.bookId - ID del libro a prestar.
+ * @param {string} req.body.userId - ID del usuario que solicita el préstamo.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const createLoan = async (req, res) => {
   try {
     const { bookId, userId } = req.body; // Datos desde la solicitud
@@ -11,6 +19,14 @@ const createLoan = async (req, res) => {
   }
 };
 
+/**
+ * Marca un préstamo como devuelto para un usuario y libro específicos.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} req.body - Datos del préstamo.
+ * @param {string} req.body.bookId - ID del libro a devolver.
+ * @param {string} req.body.userId - ID del usuario que devuelve el libro.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const returnLoan = async (req, res) => {
   try {
     const { bookId, userId } = req.body; // Obtener bookId y userId desde el cuerpo de la solicitud
@@ -29,6 +45,11 @@ const returnLoan = async (req, res) => {
   }
 };
 
+/**
+ * Obtiene la lista de todos los préstamos registrados.
+ * @param {Object} req - Objeto de solicitud.
+ * @param {Object} res - Objeto de respuesta.
+ */
 const getLoans = async (req, res) => {
   try {
     const loans = await loanService.getLoans(); // Obtener todos los préstamos
@@ -38,4 +59,5 @@ const getLoans = async (req, res) => {
   }
 };
 
+// Exportamos los controladores para ser utilizados en las rutas
 module.exports = { createLoan, returnLoan, getLoans };
