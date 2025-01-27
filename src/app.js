@@ -11,15 +11,25 @@ const app = express();
 // Middleware para parsear JSON
 app.use(bodyParser.json());
 
-// Configuración de Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));  // Ruta para acceder a Swagger UI
+/**
+ * Configuración de Swagger.
+ * La documentación de la API está disponible en /api-docs.
+ */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Rutas de la API
+/**
+ * Rutas de la API.
+ * - /api/books: Rutas relacionadas con libros.
+ * - /api/loans: Rutas relacionadas con préstamos.
+ */
 app.use('/api', bookRoutes);
 app.use('/api', loanRoutes);  // Rutas para préstamos
 app.use('/api', contactRoutes); // Rutas de contactos
 
-// Sincronización de la base de datos (forzar recreación en desarrollo)
+/**
+ * Sincronización de la base de datos.
+ * En desarrollo, se fuerza la recreación de las tablas.
+ */
 sequelize.sync({ force: true })
   .then(() => console.log('Base de datos sincronizada y tablas recreadas'))
   .catch(err => console.log('Error al sincronizar la base de datos: ', err));

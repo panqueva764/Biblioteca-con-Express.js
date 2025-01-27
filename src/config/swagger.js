@@ -2,6 +2,7 @@
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+// Configuración de Swagger para la documentación de la API
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -11,7 +12,7 @@ const swaggerOptions = {
       description: 'API para gestionar libros y órdenes',
     },
   },
-  apis: ['./src/routes/*.js'],
+  apis: ['./src/routes/*.js'], // Ruta a los archivos que contienen las definiciones de Swagger
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);

@@ -2,10 +2,23 @@
 const loanRepository = require('../repositories/loanRepository');
 
 class LoanService {
+  /**
+   * Crea un nuevo préstamo para un libro y un usuario.
+   * @param {number} bookId - ID del libro a prestar.
+   * @param {number} userId - ID del usuario que solicita el préstamo.
+   * @returns {Promise<Object>} - Préstamo creado.
+   */
   async createLoan(bookId, userId) {
-  return loanRepository.createLoan(bookId, userId);
+    return loanRepository.createLoan(bookId, userId);
   }
 
+  /**
+   * Marca un préstamo como devuelto para un libro y un usuario.
+   * @param {number} bookId - ID del libro a devolver.
+   * @param {number} userId - ID del usuario que devuelve el libro.
+   * @returns {Promise<Object>} - Préstamo actualizado.
+   * @throws {Error} - Si no se encuentra el préstamo, el libro o ya ha sido devuelto.
+   */
   async returnLoan(bookId, userId) {
     // Buscar el préstamo que coincida con el bookId y userId
     const loan = await loanRepository.findLoanByBookAndUser(bookId, userId);
@@ -35,6 +48,10 @@ class LoanService {
     return loan;
   }
 
+  /**
+   * Obtiene todos los préstamos registrados.
+   * @returns {Promise<Array<Object>>} - Lista de préstamos.
+   */
   async getLoans() {
     return loanRepository.getLoans();
   }

@@ -3,7 +3,13 @@ const Loan = require('../models/loan');
 const { Book } = require('../models/book');
 
 class LoanRepository {
-  // Crear un préstamo
+  /**
+   * Crea un nuevo préstamo para un libro.
+   * @param {number} bookId - ID del libro a prestar.
+   * @param {number} userId - ID del usuario que solicita el préstamo.
+   * @returns {Promise<Object>} - Préstamo creado.
+   * @throws {Error} - Si el libro no existe o no está disponible.
+   */
   async createLoan(bookId, userId) {
     // Buscar el libro
     const book = await Book.findByPk(bookId);
@@ -22,12 +28,16 @@ class LoanRepository {
     // Actualizar el estado del libro
     await book.update({ isAvailable: false });
 
-    return loan; // Retornar el préstamo
+    return loan;
   }
 
-  // Devolver un préstamo
+  /**
+   * Marca un préstamo como devuelto.
+   * @param {number} loanId - ID del préstamo a devolver.
+   * @returns {Promise<Object>} - Préstamo actualizado.
+   * @throws {Error} - Si el préstamo no existe o ya fue devuelto.
+   */
   async returnLoan(loanId) {
-    // Buscar el préstamo
     const loan = await Loan.findByPk(loanId);
     if (!loan || loan.isReturned) {
       throw new Error('El préstamo no existe o ya fue devuelto');
@@ -40,9 +50,15 @@ class LoanRepository {
     await loan.update({ isReturned: true, returnDate: new Date() });
     await book.update({ isAvailable: true });
 
-    return loan; // Retornar el préstamo actualizado
+    return loan;
   }
 
+  /**
+   * Busca un préstamo activo por libro y usuario.
+   * @param {number} bookId - ID del libro asociado al préstamo.
+   * @param {number} userId - ID del usuario asociado al préstamo.
+   * @returns {Promise<Object|null>} - Préstamo encontrado o null.
+   */
   async findLoanByBookAndUser(bookId, userId) {
     return Loan.findOne({
       where: {
@@ -53,7 +69,13 @@ class LoanRepository {
     });
   }
 
-  async findById (bookId) {
+  /**
+   * Busca un libro por su ID.
+   * @param {number} bookId - ID del libro a buscar.
+   * @returns {Promise<Object>} - Libro encontrado.
+   * @throws {Error} - Si el libro no existe.
+   */
+  async findById(bookId) {
     const book = await Book.findByPk(bookId);
 
     if (!book) {
@@ -61,10 +83,12 @@ class LoanRepository {
     }
 
     return book;
-
   }
 
-  // Obtener todos los préstamos
+  /**
+   * Obtiene todos los préstamos registrados.
+   * @returns {Promise<Array<Object>>} - Lista de préstamos.
+   */
   async getLoans() {
     return Loan.findAll();
   }
